@@ -1,0 +1,22 @@
+<app-navbar></app-navbar>
+<div class="card container" style="margin-top: 20px; padding: 5px">
+  <div class="card-header">
+    <p class="lead text-center">Work From Home Request</p>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-6">
+        <p class="lead">From:</p>
+        <p-calendar [(ngModel)]="fromDate" [showIcon]="true"></p-calendar>
+      </div>
+      <div class="col-6">
+        <p class="lead">To:</p>
+        <p-calendar [(ngModel)]="toDate" [showIcon]="true"></p-calendar>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; justify-content: center">
+    <button class="btn btn-danger" style="width:50%" type="submit">Submit</button>
+  </div>
+</div>
+<app-footer></app-footer>

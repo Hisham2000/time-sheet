@@ -1,0 +1,29 @@
+:host{
+  ::ng-deep .p-dropdown{
+    width: 100%
+  }
+
+  ::ng-deep .p-datepicker-trigger{
+    background-color: #D21312;
+  }
+
+  ::ng-deep .p-datepicker-trigger:hover{
+    background-color: #D21312;
+  }
+}
+
+.btn{
+  background-color: #D21312;
+}
+
+@media (max-width: 768px) {
+  .lead{
+    font-size: 16px;
+  }
+
+  :host{
+    ::ng-deep .p-inputtext{
+      font-size: 16px;
+    }
+  }
+}

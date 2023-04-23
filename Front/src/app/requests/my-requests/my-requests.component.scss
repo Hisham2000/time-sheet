@@ -1,0 +1,18 @@
+.boxing{
+  box-shadow: 2px 2px 2px #D21312;
+  cursor: pointer;
+  transition: box-shadow 5s;
+}
+
+.boxing-content:hover{
+  box-shadow: 5px 5px 5px #D21312;
+}
+
+.active{
+  box-shadow: 5px 5px 5px #D21312;
+}
+
+.green:before{border-left: 9px solid #73BD07; border-radius: 20px}
+.red:before{border-left: 9px solid #D21312;border-radius: 20px}
+.yellow:before{border-left: 9px solid #ffdd69;border-radius: 20px}
+.card:before{content: '';position: absolute;top: 0;left: 0;height: 100%;}

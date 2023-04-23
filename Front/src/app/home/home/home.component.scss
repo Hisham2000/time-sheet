@@ -1,0 +1,30 @@
+.card{
+  box-shadow: 2px 2px 2px 1px #D21312;
+  cursor: pointer;
+  transition: box-shadow 1s;
+}
+.card:hover{
+  box-shadow: 4px 4px 4px 4px #D21312;
+}
+
+.knob{
+  border: 2px solid ;
+  border-radius: 20px;
+  height: 150px;
+  margin-right: 20px;
+  width: auto
+}
+
+@media (max-width: 768px) {
+  .lead{
+    font-size: 16px;
+  }
+  .knob{
+    width:80%;
+    margin-bottom: 20px
+  }
+  .card{
+    margin-left: 10px;
+  }
+}
+

@@ -1,0 +1,66 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row" style="margin-top: 10vh">
+
+    <div class="col-md-8 row" style="margin-left: 20px">
+
+      <div class="col-3 knob text-center" style="border-color: green">
+        <div class="d-flex justify-content-center" style="height: auto">
+          <p-knob [(ngModel)]="value" [strokeWidth]="5" valueColor="green"
+                  [readonly]="true" [min]=0.0 [max]=25.0>
+          </p-knob>
+        </div>
+        <p>Casual vacation</p>
+      </div>
+
+      <div class="col-3 knob text-center" style="border-color: #D21312">
+        <div class="d-flex justify-content-center" style="height: auto">
+          <p-knob [(ngModel)]="value" [strokeWidth]="5" valueColor="#D21312"
+                  [readonly]="true">
+          </p-knob>
+        </div>
+        <p>Sick leave</p>
+      </div>
+
+      <div class="col-3 text-center knob" style="border-color: yellow">
+        <div class="d-flex justify-content-center" style="height: auto">
+          <p-knob [(ngModel)]="value" [strokeWidth]="5" valueColor="yellow"
+                  [readonly]="true">
+          </p-knob>
+        </div>
+        <div>
+          <p>Unpaid leave</p>
+        </div>
+      </div>
+
+      <div class="col-3 text-center knob" style="border-color: lightblue">
+        <div class="d-flex justify-content-center" style="height: auto">
+          <p-knob [(ngModel)]="value" [strokeWidth]="5" valueColor="lightblue"
+                  [readonly]="true">
+          </p-knob>
+        </div>
+        <p>Annual vacation</p>
+      </div>
+
+    </div>
+
+    <div class="col-md-4 row">
+
+      <div class="card text-center container d-block col-12" (click)="signIn()">
+        <div class="card-body">
+          <p class="lead display-6">
+            <i class="fas fa-sign-in"></i> Sign In
+          </p>
+        </div>
+      </div>
+
+      <div class="card text-center container d-block col-12" style="margin-top: 10vh">
+        <div class="card-body">
+          <p class="lead display-6">Sign Out <i class="fas fa-sign-out"></i></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+<div class="card container" style="margin-top:20px; padding: 5px">
+  <div class="card-header text-center">
+    <p class="lead">Permission</p>
+  </div>
+  <div class="card-body row container">
+
+<!--    <div>-->
+<!--      <label for="calender" class="lead">Permission Day:</label>-->
+<!--      <p-calendar [(ngModel)]="date" [showIcon]="true" id="calender"></p-calendar>-->
+<!--    </div>-->
+
+    <div class="row">
+      <p class="lead">Choose Permission:</p>
+      <div class="col-4 text-center chooseHours {{(hoursNumber == 2)?'active':''}}" (click)="showDate(2)">02</div>
+      <div class="col-4 text-center chooseHours {{(hoursNumber == 4)?'active':''}}" (click)="showDate(4)">04</div>
+    </div>
+    <div class="row" style="display: {{display}}">
+
+      <div class="col-6">
+        <label for="from" class="lead">From:</label>
+        <p-calendar [(ngModel)]="fromDate" [showTime]="true" [showIcon]="true" id="from"></p-calendar>
+      </div>
+
+      <div class="col-6">
+        <label for="to" class="lead">To:</label>
+        <p-calendar [(ngModel)]="toDate" [disabled]="true" [showTime]="true" [showIcon]="true" id="to"></p-calendar>
+      </div>
+    </div>
+    <div>
+      <label for="textarea" class="lead">Description:</label>
+      <textarea rows="3" pInputTextarea [autoResize]="true" style="width:100%" id="textarea"></textarea>
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+      <button class="btn btn-danger" style="width:50%; margin-top: 5px" type="submit">Submit</button>
+    </div>
+
+  </div>
+
+</div>
+<app-footer></app-footer>

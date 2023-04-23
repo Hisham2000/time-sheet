@@ -1,0 +1,37 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-8 sideImage d-none  d-md-block">
+    </div>
+    <div class="col-4 centeric">
+      <p class="animate__animated animate__backInDown lead text-center display-3"
+         style=" color: #D21312">Time Sheet</p>
+
+      <form (ngSubmit)="submit()" [formGroup]="myForm">
+
+        <div class="d-flex justify-content-md-center">
+          <span class="p-input-icon-left">
+            <i class="fas fa-envelope"></i>
+            <!--                   class="(email || email.empty)?'':'ng-dirty ng-invalid'" -->
+
+            <input type="email"
+                   class="{{(myForm.get('email')?.errors && myForm.get('email')?.touched)?'ng-dirty ng-invalid':''}}"
+                   formControlName="email"
+                   pInputText [(ngModel)]="email" name="email" email required placeholder="Enter your email">
+          </span>
+        </div>
+
+        <div style="margin-top: 20px" class="d-flex justify-content-md-center">
+          <span class="p-input-icon-left">
+            <i class="fas fa-key"></i>
+            <input type="password"
+                   class="{{(myForm.get('password')?.errors && myForm.get('password')?.touched)?'ng-dirty ng-invalid':''}}"
+                   formControlName="password" pInputText [(ngModel)]="password" name="password" required placeholder="Enter your password">
+          </span>
+        </div>
+        <p class="alert text-center" *ngIf="NotFound" style="color: #D21312"><i class="fas fa-exclamation-triangle"></i> Credential not found</p>
+        <a class="text-center d-block" style="margin-top: 10px; margin-bottom: 10px">create a new account</a>
+        <p-button type="ngSubmit" label="Submit" class="d-flex justify-content-center" [loading]="loading"></p-button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+.sideImage{
+  height: 100vh;
+  background-image: url('https://img.freepik.com/free-vector/lovely-hand-drawn-planning-schedule-concept_23-2147954705.jpg?size=626&ext=jpg&ga=GA1.1.174002316.1674074859&semt=ais');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.col-4{
+  margin-top: 20vh
+}
+
+a{
+  display: block;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.alert{
+
+}
+
+@media (max-width: 768px) {
+
+  .display-3{
+    font-size: 25px;
+    text-align: center;
+    //color:
+  }
+
+  .container-fluid{
+    height: 100vh;
+    background-image: url('https://img.freepik.com/free-vector/lovely-hand-drawn-planning-schedule-concept_23-2147954705.jpg?size=626&ext=jpg&ga=GA1.1.174002316.1674074859&semt=ais');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .centeric{
+    margin: 20%;
+
+  }
+
+}
