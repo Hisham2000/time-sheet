@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../environment/environment";
 import {catchError, throwError} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
 
   login(email: string, password: string) {
@@ -27,8 +28,7 @@ export class AuthService {
       })
     ).subscribe(response => {
       localStorage.setItem("token", response);
-      console.log(localStorage.length);
-      console.log("from subscripe");
+      this.router.navigate(['/home']);
     });
 
     if (localStorage.length >= 1) return true;

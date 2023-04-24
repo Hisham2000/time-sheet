@@ -13,7 +13,6 @@ export class HomeService {
     let headers = new HttpHeaders({
       Authorization: 'Bearer '+ localStorage.getItem('token')
     });
-    console.log('Bearer'+ localStorage.getItem('token'));
     let options = { headers: headers };
     this.http.post('http://localhost:8080/api/attendant/enter', null,options).subscribe((res:any)=>{
       console.log(res);

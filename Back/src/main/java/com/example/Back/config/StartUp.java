@@ -7,6 +7,7 @@ import com.example.Back.services.UserServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Component
 @RequiredArgsConstructor
+@Order(1)
 public class StartUp implements CommandLineRunner {
 
     @Autowired

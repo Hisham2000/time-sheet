@@ -5,7 +5,9 @@ import com.example.Back.services.AttendenceServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/attendant")
@@ -15,7 +17,18 @@ public class AttendenceController {
     AttendenceServices attendenceServices;
 
     @PostMapping("enter")
-    public void attend(@RequestHeader HashMap headers){
-        Attendence attendence = attendenceServices.save(headers);
+    public Attendence attend(@RequestHeader HashMap headers){
+        return attendenceServices.save(headers);
+    }
+
+    @PostMapping("leave")
+    public Attendence leave(@RequestHeader HashMap headers){
+        return attendenceServices.updateLeave(headers);
+    }
+
+    @GetMapping("/user")
+    public Set<LocalDate> attendenceUser(@RequestHeader HashMap headers)
+    {
+        return attendenceServices.attendenceUser(headers);
     }
 }

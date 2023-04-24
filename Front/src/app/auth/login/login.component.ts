@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -8,7 +9,7 @@ import {AuthService} from "../auth.service";
 })
 export class LoginComponent {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private router: Router) {
   }
   email: any;
   password: any;
@@ -37,6 +38,8 @@ export class LoginComponent {
   submit() {
     this.authService.login(this.myForm.get("email")?.value+"", this.myForm.get("password")?.value+"");
     if(localStorage.getItem("token")) this.NotFound = true;
-    else this.NotFound = false;
+    else{
+      this.NotFound = false;
+    }
   }
 }
