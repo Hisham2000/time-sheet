@@ -8,7 +8,7 @@ import { VacationRequestComponent } from './vacation-request/vacation-request.co
 import {FooterModule} from "../common/footer/footer.module";
 import {DropdownModule} from "primeng/dropdown";
 import {RadioButtonModule} from "primeng/radiobutton";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CalendarModule} from "primeng/calendar";
 import { WorkFromHomeComponent } from './work-from-home/work-from-home.component';
 import { PermissionComponent } from './permission/permission.component';
@@ -33,7 +33,8 @@ import { WorkLeaveComponent } from './work-leave/work-leave.component';
         RadioButtonModule,
         FormsModule,
         CalendarModule,
-        InputTextareaModule
+        InputTextareaModule,
+        ReactiveFormsModule
     ]
 })
 export class RequestsModule { }

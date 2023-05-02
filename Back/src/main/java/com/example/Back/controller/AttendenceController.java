@@ -11,7 +11,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/attendant")
-@CrossOrigin()
+@CrossOrigin(origins = "http://localhost:4200")
 public class AttendenceController {
     @Autowired
     AttendenceServices attendenceServices;

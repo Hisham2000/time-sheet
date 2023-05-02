@@ -15,15 +15,15 @@
   </div>
 </div>
 
-<div class="card {{color}}" style="margin: 10px">
+<div class="card {{color}}" style="margin: 10px" *ngFor="let request of requests">
   <div class="card-header">
-    <p class="text-center lead">1 - request</p>
+    <p class="text-center lead">{{request.id}} - request</p>
   </div>
   <div class="card-body">
     <div class="row">
-      <p class="lead col-sm-6">From : 2022-10-10</p>
-      <p class="lead col-sm-6">To : 2022-10-10</p>
-      <p class="lead col-sm-6">Type: Work From Home</p>
+      <p class="lead col-sm-6">From : {{ request.fromDay }}</p>
+      <p class="lead col-sm-6">To : {{ request.toDay }}</p>
+      <p class="lead col-sm-6">Type: {{ request.requests.requestType.name }}</p>
       <p class="lead col-sm-6">Status: accepted</p>
     </div>
   </div>

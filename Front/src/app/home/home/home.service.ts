@@ -1,21 +1,41 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environment/environment";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HomeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  signIn(){
-    let headers = new HttpHeaders({
-      Authorization: 'Bearer '+ localStorage.getItem('token')
+  addHeaders() {
+    return new HttpHeaders({
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,HEAD,OPTIONS',
+      'Authorization': localStorage.getItem('token')+'',
     });
-    let options = { headers: headers };
-    this.http.post('http://localhost:8080/api/attendant/enter', null,options).subscribe((res:any)=>{
-      console.log(res);
+  }
+
+  signIn() {
+    let defaultConfig = {
+      headers: {
+        'Content-Type': 'application/json;',
+        'Authorization': localStorage.getItem("token") + '',
+      }
+    };
+    console.log(localStorage.getItem('token'));
+    this.http.post("api/attendant/enter", {},{headers: this.addHeaders()}).subscribe((response:any)=>{
+
+    });
+  }
+
+  signOut(){
+    this.http.post("api/attendant/leave",{}, {headers: this.addHeaders()}).subscribe((response:any)=>{
+      console.log(response);
     });
   }
 }

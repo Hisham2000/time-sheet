@@ -27,7 +27,7 @@ export class AuthService {
         return throwError('Token Not Found');
       })
     ).subscribe(response => {
-      localStorage.setItem("token", response);
+      localStorage.setItem("token", 'Bearer '+response);
       this.router.navigate(['/home']);
     });
 

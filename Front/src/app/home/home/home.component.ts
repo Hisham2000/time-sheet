@@ -12,7 +12,10 @@ export class HomeComponent {
   value = 10;
 
   signIn() {
-    console.log("hererereerer");
     this.homeService.signIn();
+  }
+
+  signOut(){
+    this.homeService.signOut();
   }
 }
