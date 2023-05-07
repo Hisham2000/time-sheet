@@ -27,9 +27,9 @@ public class UserServices {
 
     public void save(User user) {
         user.setPassword(bCryptPasswordEncoder.encode("123456789"));
-        String body = "User Name: " + user.getName() + "\n Email: "+ user.getEmail() + "\n password: 123456789";
-        sendEmailService.sendEmail(user.getEmail(),
-                "Account Details on Time Sheet", body);
+//        String body = "User Name: " + user.getName() + "\n Email: "+ user.getEmail() + "\n password: 123456789";
+//        sendEmailService.sendEmail(user.getEmail(),
+//                "Account Details on Time Sheet", body);
         userRepo.save(user);
     }
 
