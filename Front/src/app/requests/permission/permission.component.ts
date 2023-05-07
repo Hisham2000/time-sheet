@@ -13,7 +13,7 @@ export class PermissionComponent {
 
   showDate(number: number) {
     this.display = "block";
-    this.toDate = new Date(new Date().getTime()+number*60*60*1000);
+    this.toDate = new Date(this.fromDate.getTime()+number*60*60*1000);
     this.hoursNumber = number;
   }
 }

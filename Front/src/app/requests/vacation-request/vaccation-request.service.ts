@@ -22,6 +22,7 @@ export class VaccationRequestService {
       "toDay": toDate,
       "halfDayOrFullDay": 0,
       "vaccationType": vaccationType,
+      "description": null,
       "requests": {"requestType": {id: 2, name: "Vacation request"}}
     }
     this.http.post("api/requestDetails/save", body, {headers: this.addHeaders()}).subscribe();
@@ -33,9 +34,21 @@ export class VaccationRequestService {
       "toDay": toDay,
       "halfDayOrFullDay": 0,
       "vaccationType": null,
+      "description": null,
       "requests": {"requestType": {id: 1, name: "Work From Home"}}
     }
 
     this.http.post("api/requestDetails/save", body, {headers: this.addHeaders()}).subscribe();
+  }
+
+  workLeave(fromDate:any, toDate:any){
+    let body = {
+      "fromDay": fromDate,
+      "toDay": toDate,
+      "halfDayOrFullDay": 0,
+      "vaccationType": null,
+      "description": null,
+      "requests": {"requestType": {id: 4, name: "Work Leave"}}
+    }
   }
 }

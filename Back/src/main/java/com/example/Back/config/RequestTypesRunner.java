@@ -23,5 +23,7 @@ public class RequestTypesRunner implements CommandLineRunner {
         requestTypeServices.save(requestType);
         requestType = new RequestType(3L, "Permission");
         requestTypeServices.save(requestType);
+        requestType = new RequestType(4L, "Work Leave");
+        requestTypeServices.save(requestType);
     }
 }

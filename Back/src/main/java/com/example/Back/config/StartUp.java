@@ -25,28 +25,41 @@ public class StartUp implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        rolesServices.save(new Roles(1L,"Admin"));
-        rolesServices.save(new Roles(2L,"User"));
+        rolesServices.save(new Roles(1L,"User"));
+        rolesServices.save(new Roles(2L,"HR"));
+        rolesServices.save(new Roles(3L,"Manager"));
 
-        Set<Roles> adminRolesSet = new HashSet<>();
-        adminRolesSet.add(rolesServices.findByName("Admin").get());
         Set<Roles> userRolesSet = new HashSet<>();
         userRolesSet.add(rolesServices.findByName("User").get());
+        Set<Roles> hrRolesSet = new HashSet<>();
+        hrRolesSet.add(rolesServices.findByName("HR").get());
+        Set<Roles> managerRolesSet = new HashSet<>();
+        managerRolesSet.add(rolesServices.findByName("Manager").get());
 
         userServices.save(new User(1L,
                 "Hisham Anwar",
                 "hishamanwar72@gmail.com",
                 "01149027532",
+                12345,
                 "123456789",
-                adminRolesSet
+                userRolesSet
                 ));
 
         userServices.save(new User(2L,
                 "AnwarFarouk",
                 "Anwar@gmail.com",
                 "01149027532",
+                2345,
                 "123456789",
-                userRolesSet
+                hrRolesSet
                 ));
+        userServices.save(new User(3L,
+                "Hassan Hassan",
+                "Hassan@gmail.com",
+                "01149027532",
+                345,
+                "123456789",
+                managerRolesSet
+        ));
     }
 }

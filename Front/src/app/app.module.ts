@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NavbarModule} from "./common/navbar/navbar.module";
 import { ErrorPageComponent } from './error-page/error-page.component';
 import {HttpClientModule} from "@angular/common/http";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,7 @@ import {HttpClientModule} from "@angular/common/http";
         NavbarModule,
         HttpClientModule
     ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

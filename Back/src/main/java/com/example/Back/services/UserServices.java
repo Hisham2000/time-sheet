@@ -1,5 +1,6 @@
 package com.example.Back.services;
 
+import com.example.Back.config.SendEmailService;
 import com.example.Back.entity.User;
 import com.example.Back.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,8 @@ public class UserServices {
     UserRepo userRepo;
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    SendEmailService sendEmailService;
     public Iterable<User> getAll(){
         return userRepo.findAll();
     }
@@ -23,7 +26,10 @@ public class UserServices {
     }
 
     public void save(User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setPassword(bCryptPasswordEncoder.encode("123456789"));
+        String body = "User Name: " + user.getName() + "\n Email: "+ user.getEmail() + "\n password: 123456789";
+        sendEmailService.sendEmail(user.getEmail(),
+                "Account Details on Time Sheet", body);
         userRepo.save(user);
     }
 
@@ -33,5 +39,10 @@ public class UserServices {
 
     public User findById(Long id){
         return userRepo.findById(id).get();
+    }
+
+    public Iterable<User> delete(Long id){
+        userRepo.deleteById(id);
+        return userRepo.findAll();
     }
 }

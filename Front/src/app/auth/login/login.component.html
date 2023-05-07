@@ -20,7 +20,7 @@
           </span>
         </div>
 
-        <div style="margin-top: 20px" class="d-flex justify-content-md-center">
+        <div style="margin-top: 20px; margin-bottom: 20px" class="d-flex justify-content-md-center">
           <span class="p-input-icon-left">
             <i class="fas fa-key"></i>
             <input type="password"
@@ -29,7 +29,7 @@
           </span>
         </div>
         <p class="alert text-center" *ngIf="NotFound" style="color: #D21312"><i class="fas fa-exclamation-triangle"></i> Credential not found</p>
-        <a class="text-center d-block" style="margin-top: 10px; margin-bottom: 10px">create a new account</a>
+<!--        <a class="text-center d-block" style="margin-top: 10px; margin-bottom: 10px">create a new account</a>-->
         <p-button type="ngSubmit" label="Submit" class="d-flex justify-content-center" [loading]="loading"></p-button>
       </form>
     </div>

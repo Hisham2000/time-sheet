@@ -18,4 +18,12 @@ export class MyRequestService {
   userRequests(){
     return this.http.get("/api/requestDetails/all", {headers: this.addHeaders()});
   }
+
+  pending(){
+    return this.http.get("/api/requestDetails/pending", {headers: this.addHeaders()});
+  }
+
+  rejected(){
+    return this.http.get("/api/requestDetails/rejected", {headers: this.addHeaders()});
+  }
 }

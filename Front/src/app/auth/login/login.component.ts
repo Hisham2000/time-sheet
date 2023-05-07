@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {AuthService} from "../auth.service";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng/api";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -37,7 +38,9 @@ export class LoginComponent {
 
   submit() {
     this.authService.login(this.myForm.get("email")?.value+"", this.myForm.get("password")?.value+"");
-    if(localStorage.getItem("token")) this.NotFound = true;
+    if(localStorage.length == 0 ) {
+      this.NotFound = true;
+    }
     else{
       this.NotFound = false;
     }

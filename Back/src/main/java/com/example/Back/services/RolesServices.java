@@ -20,4 +20,8 @@ public class RolesServices {
     public Optional<Roles>findByName(String name){
         return rolesRepo.findByName(name);
     }
+
+    public Iterable<Roles> all(){
+        return rolesRepo.findAll();
+    }
 }
