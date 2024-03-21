@@ -1,6 +1,6 @@
 package com.example.Back.controller;
 
-import com.example.Back.entity.VaccationType;
+import com.example.Back.entity.VacationType;
 import com.example.Back.services.VaccationTypeServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ public class VaccationTypeController {
     VaccationTypeServices vaccationTypeServices;
 
     @GetMapping("/all")
-    public List<VaccationType> vaccationTypeList(){
+    public List<VacationType> vaccationTypeList(){
         return vaccationTypeServices.all();
     }
 }

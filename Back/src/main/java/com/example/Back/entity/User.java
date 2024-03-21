@@ -1,15 +1,14 @@
 package com.example.Back.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
@@ -21,13 +20,24 @@ public class User {
     private Long id;
 
     private String name;
+    @Column(unique = true)
     private String email;
     private String phone;
     private int salary;
     @JsonIgnore
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Roles> rolesset;
+    @ManyToOne()
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
+    private Roles role;
+
+    @Override
+    public String toString() {
+        String userData = "{" +
+                "\"id\": " + id +
+                ", \"name\": \"" + name + "\"" +
+                ", \"email\": \"" + email + "\"" +
+                ", \"role\" : \"" + role.getName() + "\"" +
+                "}";
+        return userData;
+    }
 }

@@ -19,7 +19,7 @@ public class RequestDetailsServices {
         Requests request = new Requests(requestDetailsDto.getRequests().getRequestType(), user);
         RequestDetails requestDetails = new RequestDetails(
                 requestDetailsDto.getFromDay(), requestDetailsDto.getToDay(),
-                requestDetailsDto.getHalfDayOrFullDay(), requestDetailsDto.getVaccationType(),
+                requestDetailsDto.getHalfDayOrFullDay(), requestDetailsDto.getVacationType(),
                 request, requestDetailsDto.getDescription(), requestDetailsDto.getStatus());
         return requestDetailsRepo.save(requestDetails);
     }

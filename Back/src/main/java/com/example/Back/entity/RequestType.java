@@ -1,19 +1,19 @@
 package com.example.Back.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "request_type")
 public class RequestType {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "req_type_seq")
-    @SequenceGenerator(name = "req_type_seq", initialValue = 1, sequenceName = "req_type_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "request_type_seq")
+    @SequenceGenerator(name = "request_type_seq", initialValue = 1, sequenceName = "request_type_seq", allocationSize = 1)
     private Long id;
 
     private String name;

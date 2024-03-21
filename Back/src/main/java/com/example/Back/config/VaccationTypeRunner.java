@@ -1,6 +1,6 @@
 package com.example.Back.config;
 
-import com.example.Back.entity.VaccationType;
+import com.example.Back.entity.VacationType;
 import com.example.Back.services.VaccationTypeServices;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +16,10 @@ public class VaccationTypeRunner implements CommandLineRunner {
     VaccationTypeServices vaccationTypeServices;
     @Override
     public void run(String... args) throws Exception {
-        vaccationTypeServices.save(new VaccationType(1L, "Annual Vacation"));
-        vaccationTypeServices.save(new VaccationType(2L, "Casual Vacation"));
-        vaccationTypeServices.save(new VaccationType(3L, "UnPaid Leave"));
-        vaccationTypeServices.save(new VaccationType(4L, "Sick Leave"));
+//        vaccationTypeServices.save(new VacationType(1L, "Annual Vacation"));
+//        vaccationTypeServices.save(new VacationType(2L, "Casual Vacation"));
+//        vaccationTypeServices.save(new VacationType(3L, "UnPaid Leave"));
+//        vaccationTypeServices.save(new VacationType(4L, "Sick Leave"));
 
 
     }

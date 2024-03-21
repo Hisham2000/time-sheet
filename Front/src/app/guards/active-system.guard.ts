@@ -12,6 +12,7 @@ export class ActiveSystemGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     if(localStorage.length != 0 && localStorage.getItem('token')){
+      debugger
       //please make validation on token
       return true;
     }

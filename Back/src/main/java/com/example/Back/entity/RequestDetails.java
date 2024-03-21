@@ -1,31 +1,30 @@
 package com.example.Back.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "request_details")
 public class RequestDetails {
 
-    public RequestDetails(LocalDate fromDay, LocalDate toDay, int halfDayOrFullDay, VaccationType vaccationType, Requests request, String desription, int status){
+    public RequestDetails(LocalDate fromDay, LocalDate toDay, int halfDayOrFullDay, VacationType vacationType, Requests request, String desription, int status){
         this.fromDay = fromDay;
         this.toDay = toDay;
         this.halfDayOrFullDay = halfDayOrFullDay;
-        this.vaccationType = vaccationType;
+        this.vacationType = vacationType;
         this.requests = request;
         this.desription = desription;
         this.status = status;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "req_detail_seq")
-    @SequenceGenerator(name = "req_detail_seq", initialValue = 1, sequenceName = "req_detail_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "request_details_seq")
+    @SequenceGenerator(name = "request_details_seq", initialValue = 1, sequenceName = "request_details_seq", allocationSize = 1)
     private Long id;
 
     private LocalDate fromDay;
@@ -38,7 +37,7 @@ public class RequestDetails {
     // zero for pending 1 for accepted 2 for rejected
     private int status = 0;
     @ManyToOne
-    private VaccationType vaccationType;
+    private VacationType vacationType;
     @OneToOne(cascade = CascadeType.ALL)
     private Requests requests;
 

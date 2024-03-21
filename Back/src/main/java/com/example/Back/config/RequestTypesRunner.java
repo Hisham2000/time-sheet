@@ -17,13 +17,13 @@ public class RequestTypesRunner implements CommandLineRunner {
     RequestTypeServices requestTypeServices;
     @Override
     public void run(String... args) throws Exception {
-        RequestType requestType = new RequestType(1L, "Work From Home");
-        requestTypeServices.save(requestType);
-        requestType = new RequestType(2L, "Vacation request");
-        requestTypeServices.save(requestType);
-        requestType = new RequestType(3L, "Permission");
-        requestTypeServices.save(requestType);
-        requestType = new RequestType(4L, "Work Leave");
-        requestTypeServices.save(requestType);
+//        RequestType requestType = new RequestType(1L, "Work From Home");
+//        requestTypeServices.save(requestType);
+//        requestType = new RequestType(2L, "Vacation request");
+//        requestTypeServices.save(requestType);
+//        requestType = new RequestType(3L, "Permission");
+//        requestTypeServices.save(requestType);
+//        requestType = new RequestType(4L, "Work Leave");
+//        requestTypeServices.save(requestType);
     }
 }

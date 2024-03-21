@@ -1,16 +1,16 @@
 package com.example.Back.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Data
+@Setter
+@Getter
+@Table(name = "requests")
 @AllArgsConstructor
 @NoArgsConstructor
 public class Requests {
@@ -19,8 +19,8 @@ public class Requests {
         this.user = user;
     }
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "req_seq")
-    @SequenceGenerator(name = "req_seq", initialValue = 1, sequenceName = "req_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "requests_seq")
+    @SequenceGenerator(name = "requests_seq", initialValue = 1, sequenceName = "requests_seq", allocationSize = 1)
     private Long id;
 
 

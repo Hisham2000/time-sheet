@@ -29,11 +29,7 @@ public class UserUtilis implements UserDetailsService {
 
     private static List<GrantedAuthority> getAuthorities(User user){
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        if(!user.getRolesset().isEmpty()){
-            user.getRolesset().forEach(roles -> {
-                grantedAuthorities.add(new SimpleGrantedAuthority(roles.getName()));
-            });
-        }
-        return  grantedAuthorities;
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
+        return grantedAuthorities;
     }
 }

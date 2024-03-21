@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit{
   ngOnInit(): void {
 
     this.http.get("/api/userroles", {headers: this.addHeaders()}).subscribe((response:any)=>{
+      debugger
       this.items = [
         {
           label: 'Home',

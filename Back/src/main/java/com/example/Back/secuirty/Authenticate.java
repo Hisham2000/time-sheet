@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping(value = "/api")
 @CrossOrigin()
 public class Authenticate {
     @Autowired
@@ -28,13 +28,14 @@ public class Authenticate {
     AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public String generateToken(@RequestBody JwtTokenRequest jwtTokenRequest) {
-
+    public HashMap<String, String> generateToken(@RequestBody JwtTokenRequest jwtTokenRequest) {
+        HashMap<String, String> response = new HashMap<>();
         //if authentication is success it will proceed to generate token
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(jwtTokenRequest.getEmail(), jwtTokenRequest.getPassword())
         );
-        return jwtTokenUtilies.generateToken(jwtTokenRequest.getEmail());
+        response.put("token", jwtTokenUtilies.generateToken(jwtTokenRequest.getEmail()));
+        return response;
     }
 
     @Secured("HR")
@@ -61,10 +62,10 @@ public class Authenticate {
     }
 
     @GetMapping("/userroles")
-    public Set<Roles> getRolesFromToken(@RequestHeader HashMap headers){
+    public Roles getRolesFromToken(@RequestHeader HashMap headers){
         String auth = (String) headers.get("authorization");
         String email = jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
         User user = userServices.findByEmail(email);
-        return user.getRolesset();
+        return user.getRole();
     }
 }
