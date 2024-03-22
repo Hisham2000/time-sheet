@@ -1,11 +1,10 @@
 import { Routes } from '@angular/router';
-import {ErrorPageComponent} from "./error-page/error-page.component";
 import {ActiveLoginGuard} from "./guards/active-login.guard";
 import {ActiveSystemGuard} from "./guards/active-system.guard";
 import {IsHrGuard} from "./guards/is-hr.guard";
 
 export const routes: Routes = [
-  {path: "auth", children: [
+  {path: "auth", canActivate: [ActiveLoginGuard], children: [
       {path: "login", loadComponent: () => (import('./auth/login/login.component').then(m=>m.LoginComponent))},
       {path: "", pathMatch: "full", redirectTo: '/auth/login'}
     ]},
@@ -15,5 +14,5 @@ export const routes: Routes = [
   {path: "hr", loadChildren: () => import("./hr/hr.module").then(m=>m.HrModule), canActivate: [ActiveSystemGuard, IsHrGuard]},
   {path: "setting", loadChildren: () => import("./setting/setting.module").then(m=>m.SettingModule), canActivate: [ActiveSystemGuard]},
   {path: "", pathMatch: "full", redirectTo: "/home"},
-  {path: "**", component: ErrorPageComponent}
+  {path: "**", loadComponent: () => (import('./error-page/error-page.component').then(m=>m.ErrorPageComponent))}
 ];
