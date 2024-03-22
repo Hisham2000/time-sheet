@@ -7,6 +7,8 @@ import {Injectable} from "@angular/core";
 export class ServiceUrl {
   public baseUrl = '';
   public login = 'login';
+  public attend = 'attendant/enter';
+  public leave = 'attendant/leave';
 
   constructor() {
     this.getUrl()

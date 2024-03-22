@@ -1,5 +1,6 @@
 package com.example.Back.secuirty;
 
+import com.example.Back.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,6 +15,7 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 
 @Component
@@ -24,9 +26,16 @@ public class JwtRequestFilter extends OncePerRequestFilter{
 
     @Autowired
     UserUtilis userUtilis;
+    @Autowired
+    SessionInfo sessionInfo;
+    @Autowired
+    UserRepo userRepo;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(
+            @NotNull HttpServletRequest request,
+            @NotNull HttpServletResponse response,
+            @NotNull FilterChain filterChain) throws ServletException, IOException {
         String requestHeader = request.getHeader("Authorization");
         String token = null;
         String bearer = "Bearer ";
@@ -60,6 +69,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
                 // that the current user is authenticated. So it passes the
                 // Spring Security Configurations successfully.
                 SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                sessionInfo.setUser(userRepo.findUsersByEmail(email).get());
             }
 
         }

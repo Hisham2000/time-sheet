@@ -22,7 +22,7 @@ export class ServiceCall {
       defaultConfig = {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': '' + localStorage.getItem("Authorization")
+          'Authorization': '' + localStorage.getItem("token")
         }
       };
     } else if (config == "text") {

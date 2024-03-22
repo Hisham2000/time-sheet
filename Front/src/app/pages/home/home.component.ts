@@ -6,6 +6,8 @@ import {ToastModule} from "primeng/toast";
 import {KnobModule} from "primeng/knob";
 import {FormsModule} from "@angular/forms";
 import {FooterModule} from "../../common/footer/footer.module";
+import {ServiceUrl} from "../../../../Utilities/ServiceUrl";
+import {ServiceCall} from "../../../../Utilities/ServiceCall";
 
 @Component({
   selector: 'app-home',
@@ -22,16 +24,25 @@ import {FooterModule} from "../../common/footer/footer.module";
   standalone: true
 })
 export class HomeComponent implements AfterViewInit{
-  constructor(private homeService: HomeService, private messageService: MessageService) {
+  constructor(private homeService: HomeService,
+              private _serviceUrl: ServiceUrl,
+              private _serviceCall: ServiceCall,
+              private messageService: MessageService) {
   }
   value = 10;
 
   signIn() {
-    this.homeService.signIn();
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.attend;
+    this._serviceCall.postObservable(url, {}, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
+      this.messageService.add({ severity: 'success', summary: 'Sign In Successfully', detail: "Welcome "+response.user.name });
+    });
   }
 
   signOut(){
-    this.homeService.signOut();
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.leave;
+    this._serviceCall.postObservable(url, {}, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
+      this.messageService.add({ severity: 'success', summary: 'Sign Out Successfully', detail: "Bye Bye "+response.user.name });
+    })
   }
 
   ngAfterViewInit(): void {
