@@ -1,24 +1,25 @@
-package com.example.Back.secuirty;
+package com.example.Back.controller;
 
+import com.example.Back.dto.LoginRequest;
 import com.example.Back.entity.Roles;
 import com.example.Back.entity.User;
+import com.example.Back.secuirty.JwtTokenUtilies;
 import com.example.Back.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api")
 @CrossOrigin()
-public class Authenticate {
+public class AuthController {
     @Autowired
     JwtTokenUtilies jwtTokenUtilies;
     @Autowired
@@ -28,13 +29,13 @@ public class Authenticate {
     AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public HashMap<String, String> generateToken(@RequestBody JwtTokenRequest jwtTokenRequest) {
+    public HashMap<String, String> generateToken(@Validated @RequestBody LoginRequest loginRequest) {
         HashMap<String, String> response = new HashMap<>();
         //if authentication is success it will proceed to generate token
         authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(jwtTokenRequest.getEmail(), jwtTokenRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
         );
-        response.put("token", jwtTokenUtilies.generateToken(jwtTokenRequest.getEmail()));
+        response.put("token", jwtTokenUtilies.generateToken(loginRequest.getEmail()));
         return response;
     }
 
