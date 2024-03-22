@@ -8,6 +8,7 @@ import {FooterModule} from "../common/footer/footer.module";
 import {KnobModule} from "primeng/knob";
 import {FormsModule} from "@angular/forms";
 import {ToastModule} from "primeng/toast";
+import {MessageService} from "primeng/api";
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {ToastModule} from "primeng/toast";
         KnobModule,
         FormsModule,
         ToastModule
-    ]
+    ],
+  providers: [MessageService]
 })
 export class HomeModule { }

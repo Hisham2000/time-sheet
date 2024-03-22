@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
+import {Router, RouterOutlet} from "@angular/router";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet]
 })
 export class AppComponent implements OnInit {
   title = 'Front';
