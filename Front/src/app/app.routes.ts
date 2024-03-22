@@ -8,11 +8,14 @@ export const routes: Routes = [
       {path: "login", loadComponent: () => (import('./auth/login/login.component').then(m=>m.LoginComponent))},
       {path: "", pathMatch: "full", redirectTo: '/auth/login'}
     ]},
-  {path: "home", loadChildren: () => import("./home/home.module").then( m=> m.HomeModule), canActivate: [ActiveSystemGuard]},
+  {path: "pages", canActivate: [ActiveSystemGuard], loadComponent: () => (import('./pages/pages.component').then(m=>m.PagesComponent)), children: [
+      {path: "home", loadComponent: () => (import('./pages/home/home.component').then(m=>m.HomeComponent))},
+      {path: "", pathMatch: "full", redirectTo: "/pages/home"}
+    ]},
   {path: "attendance", loadChildren: () => import("./attendence/attendence.module").then(m=>m.AttendenceModule), canActivate: [ActiveSystemGuard]},
   {path: "requests", loadChildren: () => import("./requests/requests.module").then(m=>m.RequestsModule), canActivate: [ActiveSystemGuard]},
   {path: "hr", loadChildren: () => import("./hr/hr.module").then(m=>m.HrModule), canActivate: [ActiveSystemGuard, IsHrGuard]},
   {path: "setting", loadChildren: () => import("./setting/setting.module").then(m=>m.SettingModule), canActivate: [ActiveSystemGuard]},
-  {path: "", pathMatch: "full", redirectTo: "/home"},
+  {path: "", pathMatch: "full", redirectTo: "/pages/home"},
   {path: "**", loadComponent: () => (import('./error-page/error-page.component').then(m=>m.ErrorPageComponent))}
 ];

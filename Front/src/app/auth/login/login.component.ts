@@ -6,6 +6,7 @@ import {ServiceUrl} from "../../../../Utilities/ServiceUrl";
 import {ServiceCall} from "../../../../Utilities/ServiceCall";
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
+import {NgIf} from "@angular/common";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,7 +14,8 @@ import {InputTextModule} from "primeng/inputtext";
   imports: [
     ReactiveFormsModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    NgIf
   ],
   standalone: true
 })
@@ -55,7 +57,7 @@ export class LoginComponent {
     };
     this._serviceCall.postObservable(url, body, {}).subscribe((response:any)=>{
       localStorage.setItem("token", 'Bearer '+response.token);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/pages']);
     });
   }
 }

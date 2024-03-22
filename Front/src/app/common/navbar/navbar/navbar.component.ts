@@ -31,7 +31,7 @@ export class NavbarComponent implements OnInit{
         {
           label: 'Home',
           icon: 'fas fa-home',
-          routerLink: '/home'
+          routerLink: '/pages/home'
         },
         {
           label: 'Attendance',

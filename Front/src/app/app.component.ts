@@ -11,7 +11,7 @@ import {CommonModule} from "@angular/common";
   imports: [CommonModule, RouterOutlet]
 })
 export class AppComponent implements OnInit {
-  title = 'Front';
+  title = 'HR Egypt';
 
   constructor(private http: HttpClient, private router: Router) {
   }
