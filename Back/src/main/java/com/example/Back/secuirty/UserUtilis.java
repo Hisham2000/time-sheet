@@ -15,21 +15,23 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class UserUtilis implements UserDetailsService {
-    @Autowired
-    UserServices userServices;
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<User> user = userServices.findUserByName(email);
-        if(!user.isPresent())
-            throw new UsernameNotFoundException("This User Not Found " + email);
+public class UserUtilis
+//        implements UserDetailsService
+{
+//    @Autowired
+//    UserServices userServices;
+//    @Override
+//    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//        Optional<User> user = userServices.findUserByName(email);
+//        if(!user.isPresent())
+//            throw new UsernameNotFoundException("This User Not Found " + email);
+//
+//        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), getAuthorities(user.get()));
+//    }
 
-        return new org.springframework.security.core.userdetails.User(user.get().getEmail(), user.get().getPassword(), getAuthorities(user.get()));
-    }
-
-    private static List<GrantedAuthority> getAuthorities(User user){
-        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
-        return grantedAuthorities;
-    }
+//    private static List<GrantedAuthority> getAuthorities(User user){
+//        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+//        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getName()));
+//        return grantedAuthorities;
+//    }
 }

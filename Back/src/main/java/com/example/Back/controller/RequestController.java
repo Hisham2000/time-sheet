@@ -2,8 +2,7 @@ package com.example.Back.controller;
 
 import com.example.Back.dto.SaveRequestDto;
 import com.example.Back.entity.Requests;
-import com.example.Back.entity.User;
-import com.example.Back.secuirty.JwtTokenUtilies;
+import com.example.Back.secuirty.JwtTokenUtilities;
 import com.example.Back.services.RequestServices;
 import com.example.Back.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ public class RequestController {
     @Autowired
     RequestServices requestServices;
     @Autowired
-    JwtTokenUtilies jwtTokenUtilies;
+    JwtTokenUtilities jwtTokenUtilities;
     @Autowired
     UserServices userServices;
 

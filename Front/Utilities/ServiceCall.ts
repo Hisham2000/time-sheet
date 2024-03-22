@@ -116,7 +116,7 @@ export class ServiceCall {
           }
         }), catchError(error => {
           this.handleError(error, alertError, url);
-          return throwError(null);
+          return throwError(error);
         })
       )
     } else {
@@ -125,8 +125,9 @@ export class ServiceCall {
   }
 
   public handleError(error: any, alertError: boolean, url: string) {
+    debugger
     if (error instanceof Error && error.message == '') {
-      return throwError(null);
+      return throwError(error);
     }
     let err: string;
     try {

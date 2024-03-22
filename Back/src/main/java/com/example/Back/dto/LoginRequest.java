@@ -2,9 +2,9 @@ package com.example.Back.dto;
 
 import com.example.Back.annotation.EntityExists;
 import com.example.Back.entity.User;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter

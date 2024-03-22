@@ -1,15 +1,19 @@
 package com.example.Back.controller;
 
+import com.example.Back.dto.AuthenticationResponse;
 import com.example.Back.dto.LoginRequest;
 import com.example.Back.entity.Roles;
 import com.example.Back.entity.User;
-import com.example.Back.secuirty.JwtTokenUtilies;
+import com.example.Back.handler.WrongUserNameOrPasswordException;
+import com.example.Back.secuirty.JwtTokenUtilities;
 import com.example.Back.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +25,7 @@ import java.util.HashMap;
 @CrossOrigin()
 public class AuthController {
     @Autowired
-    JwtTokenUtilies jwtTokenUtilies;
+    JwtTokenUtilities jwtTokenUtilities;
     @Autowired
     UserServices userServices;
 
@@ -29,20 +33,33 @@ public class AuthController {
     AuthenticationManager authenticationManager;
 
     @PostMapping("/login")
-    public HashMap<String, String> generateToken(@Validated @RequestBody LoginRequest loginRequest) {
-        HashMap<String, String> response = new HashMap<>();
-        //if authentication is success it will proceed to generate token
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword())
-        );
-        response.put("token", jwtTokenUtilies.generateToken(loginRequest.getEmail()));
-        return response;
+    public AuthenticationResponse generateToken(@Validated @RequestBody LoginRequest loginRequest) throws WrongUserNameOrPasswordException {
+        Authentication Authentication = null;
+        try {
+            Authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            loginRequest.getEmail(),
+                            loginRequest.getPassword()
+                    )
+            );
+        } catch (BadCredentialsException e) {
+            throw new WrongUserNameOrPasswordException("Invalid email or password");
+        }
+        User user = userServices.findUserByEmail(loginRequest.getEmail()).orElseThrow(() -> new WrongUserNameOrPasswordException("There Is No User With This Data"));
+
+        String token = jwtTokenUtilities.generateToken(user);
+
+        return AuthenticationResponse.builder()
+                .token(token)
+                .user(user)
+                .build();
+
     }
 
     @Secured("HR")
     @PostMapping("/register")
     public void register(@RequestBody User user){
-        userServices.save(user);
+//        userServices.save(user);
     }
 
     //     Note that it isn't necessary to add the ROLE_ prefix here because Spring Security will add that prefix automatically.
@@ -52,20 +69,20 @@ public class AuthController {
     public String  getInfoFromToken(@RequestHeader HashMap headers) {
 
         String auth = (String) headers.get("authorization");
-        return jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
+        return jwtTokenUtilities.getEmailFromToken(auth.substring("Bearer ".length()));
     }
 
 
     @GetMapping("/gettokendate")
     public Date getDateFromToken(@RequestHeader HashMap headers) {
         String auth = (String) headers.get("authorization");
-        return jwtTokenUtilies.getExpirationDateFromToken(auth.substring("Bearer ".length()));
+        return jwtTokenUtilities.getExpirationDateFromToken(auth.substring("Bearer ".length()));
     }
 
     @GetMapping("/userroles")
     public Roles getRolesFromToken(@RequestHeader HashMap headers){
         String auth = (String) headers.get("authorization");
-        String email = jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
+        String email = jwtTokenUtilities.getEmailFromToken(auth.substring("Bearer ".length()));
         User user = userServices.findByEmail(email);
         return user.getRole();
     }

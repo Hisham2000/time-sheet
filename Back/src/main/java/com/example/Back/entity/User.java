@@ -2,8 +2,14 @@ package com.example.Back.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -12,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
-public class User {
+public class User  implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
@@ -40,4 +46,47 @@ public class User {
                 "}";
         return userData;
     }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+        grantedAuthorities.add(new SimpleGrantedAuthority(role.getName()));
+        return grantedAuthorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled() {
+        return true;
+    }
+
 }

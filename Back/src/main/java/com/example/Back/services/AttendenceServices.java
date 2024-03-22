@@ -3,7 +3,7 @@ package com.example.Back.services;
 import com.example.Back.entity.Attendance;
 import com.example.Back.entity.User;
 import com.example.Back.repository.AttendenceRepo;
-import com.example.Back.secuirty.JwtTokenUtilies;
+import com.example.Back.secuirty.JwtTokenUtilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +20,13 @@ public class AttendenceServices {
     AttendenceRepo attendenceRepo;
 
     @Autowired
-    JwtTokenUtilies jwtTokenUtilies;
+    JwtTokenUtilities jwtTokenUtilities;
     @Autowired
     UserServices userServices;
 
     public Attendance save(HashMap headers) {
         String auth = (String) headers.get("authorization");
-        String email = jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
+        String email = jwtTokenUtilities.getEmailFromToken(auth.substring("Bearer ".length()));
         User user = userServices.findByEmail(email);
         Attendance attendance = attendenceRepo.save(new Attendance(LocalDate.now(), LocalTime.now(), null, user));
         return attendance;
@@ -34,7 +34,7 @@ public class AttendenceServices {
 
     public Attendance updateLeave(HashMap headers) {
         String auth = (String) headers.get("authorization");
-        String email = jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
+        String email = jwtTokenUtilities.getEmailFromToken(auth.substring("Bearer ".length()));
         User user = userServices.findByEmail(email);
         Attendance attendance = attendenceRepo.findAttendencesByUserIdAndDay(user.getId(), LocalDate.now());
         attendance.setLeaveTime(LocalTime.now());
@@ -43,7 +43,7 @@ public class AttendenceServices {
 
     public Set<LocalDate> attendenceUser(HashMap headers) {
         String auth = (String) headers.get("authorization");
-        String email = jwtTokenUtilies.getEmailFromToken(auth.substring("Bearer ".length()));
+        String email = jwtTokenUtilities.getEmailFromToken(auth.substring("Bearer ".length()));
         User user = userServices.findByEmail(email);
         return  attendenceRepo.findAttendencesByUserId(user.getId());
     }
