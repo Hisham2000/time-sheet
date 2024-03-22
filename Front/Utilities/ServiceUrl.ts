@@ -9,6 +9,7 @@ export class ServiceUrl {
   public login = 'login';
   public attend = 'attendant/enter';
   public leave = 'attendant/leave';
+  public getAttendanceType = 'attendance-type/all'
 
   constructor() {
     this.getUrl()

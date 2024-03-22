@@ -13,13 +13,13 @@ import java.time.LocalDate;
 @Table(name = "request_details")
 public class RequestDetails {
 
-    public RequestDetails(LocalDate fromDay, LocalDate toDay, int halfDayOrFullDay, VacationType vacationType, Requests request, String desription, int status){
+    public RequestDetails(LocalDate fromDay, LocalDate toDay, int halfDayOrFullDay, VacationType vacationType, Requests request, String description, int status){
         this.fromDay = fromDay;
         this.toDay = toDay;
         this.halfDayOrFullDay = halfDayOrFullDay;
         this.vacationType = vacationType;
         this.requests = request;
-        this.desription = desription;
+        this.description = description;
         this.status = status;
     }
     @Id
@@ -29,7 +29,7 @@ public class RequestDetails {
 
     private LocalDate fromDay;
     private LocalDate toDay;
-    private String desription;
+    private String description;
 
     // zero for not set in request 1 for halfday 2 for full day
     private int halfDayOrFullDay;

@@ -23,16 +23,25 @@ import {ServiceCall} from "../../../../Utilities/ServiceCall";
   providers: [MessageService],
   standalone: true
 })
-export class HomeComponent implements AfterViewInit{
+export class HomeComponent implements OnInit, AfterViewInit{
+  attendanceTypes: any = [];
   constructor(private homeService: HomeService,
               private _serviceUrl: ServiceUrl,
               private _serviceCall: ServiceCall,
               private messageService: MessageService) {
   }
+
+  ngOnInit(): void {
+       this.getAttendanceType();
+    }
   value = 10;
 
   signIn() {
-    let url = this._serviceUrl.baseUrl + this._serviceUrl.attend;
+    let type = this.attendanceTypes.find((type: any)=>{
+      return type.name == "Sign In";
+    });
+    debugger
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.attend + '/' + type.id;
     this._serviceCall.postObservable(url, {}, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
       this.messageService.add({ severity: 'success', summary: 'Sign In Successfully', detail: "Welcome "+response.user.name });
     });
@@ -48,5 +57,11 @@ export class HomeComponent implements AfterViewInit{
   ngAfterViewInit(): void {
     // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'You Are Logged In Successfully' });
   }
-
+  getAttendanceType(){
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.getAttendanceType;
+    this._serviceCall.getOpservable(url, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
+      debugger
+      this.attendanceTypes = response;
+    });
+  }
 }
