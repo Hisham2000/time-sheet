@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 
 import { HrRoutingModule } from './hr-routing.module';
 import { AddNewEmployeeComponent } from './add-new-employee/add-new-employee.component';
-import {NavbarModule} from "../common/navbar/navbar.module";
 import {FooterModule} from "../common/footer/footer.module";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import { AllUsersComponent } from './all-users/all-users.component';
@@ -17,6 +16,7 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import { NewEmployeeComponent } from './new-employee/new-employee.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import {NavbarComponent} from "../common/navbar/navbar/navbar.component";
 
 
 @NgModule({
@@ -29,7 +29,6 @@ import { EditUserComponent } from './edit-user/edit-user.component';
     imports: [
         CommonModule,
         HrRoutingModule,
-        NavbarModule,
         FooterModule,
         InputTextareaModule,
         TableModule,
@@ -40,7 +39,8 @@ import { EditUserComponent } from './edit-user/edit-user.component';
         SliderModule,
         ButtonModule,
         RippleModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        NavbarComponent
     ]
 })
 export class HrModule { }

@@ -69,7 +69,7 @@ export class ServiceCall {
   }
 
   getLoggedInUser(){
-    let token = localStorage.getItem("Authorization");
+    let token = localStorage.getItem("token");
     if (token != null) {
       token = token.substring("Bearer ".length);
       let decode: any = {};

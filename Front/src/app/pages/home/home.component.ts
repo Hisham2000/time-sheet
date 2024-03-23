@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {HomeService} from "./home.service";
 import {MessageService} from "primeng/api";
-import {NavbarModule} from "../../common/navbar/navbar.module";
 import {ToastModule} from "primeng/toast";
 import {KnobModule} from "primeng/knob";
 import {FormsModule} from "@angular/forms";
@@ -14,7 +13,6 @@ import {ServiceCall} from "../../../../Utilities/ServiceCall";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   imports: [
-    NavbarModule,
     ToastModule,
     KnobModule,
     FormsModule,

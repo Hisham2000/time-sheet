@@ -1,17 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ServiceUrl} from "../../../../../Utilities/ServiceUrl";
+import {ServiceCall} from "../../../../../Utilities/ServiceCall";
+import {MenubarModule} from "primeng/menubar";
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  imports: [
+    MenubarModule
+  ],
+  standalone: true
 })
 export class NavbarComponent implements OnInit{
 
     items : any = [];
+    userDetails: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private _serviceUrl: ServiceUrl,
+              private _serviceCall: ServiceCall) {
   }
 
   addHeaders() {
@@ -24,7 +34,8 @@ export class NavbarComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.userDetails = this._serviceCall.getLoggedInUser();
+    debugger
     this.http.get("/api/userroles", {headers: this.addHeaders()}).subscribe((response:any)=>{
       debugger
       this.items = [
