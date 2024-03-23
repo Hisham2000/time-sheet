@@ -6,6 +6,7 @@ import lombok.*;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Entity
 @Setter
@@ -16,22 +17,18 @@ import java.time.LocalTime;
 @Builder
 public class Attendance {
 
-    public Attendance(LocalDate day, LocalTime enterTime, LocalTime leaveTime, User user){
-        this.day = day;
-//        this.enterTime = enterTime;
-//        this.leaveTime = leaveTime;
-        this.user = user;
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attendance_seq")
     @SequenceGenerator(name = "attendance_seq", initialValue = 1, sequenceName = "attendance_seq", allocationSize = 1)
     private Long id;
 
     @NotNull(message = "The Day Field Is Required")
-    private LocalDate day;
+    @Temporal(TemporalType.DATE)
+    private Date day;
 
     @NotNull(message = "The Time Field Is Required")
-    private LocalTime time;
+    @Temporal(TemporalType.TIME)
+    private Date time;
 
     @ManyToOne()
     @JoinColumn(name = "attendance_type_id")

@@ -40,7 +40,6 @@ export class HomeComponent implements OnInit, AfterViewInit{
     let type = this.attendanceTypes.find((type: any)=>{
       return type.name == "Sign In";
     });
-    debugger
     let url = this._serviceUrl.baseUrl + this._serviceUrl.attend + '/' + type.id;
     this._serviceCall.postObservable(url, {}, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
       this.messageService.add({ severity: 'success', summary: 'Sign In Successfully', detail: "Welcome "+response.user.name });
@@ -48,7 +47,10 @@ export class HomeComponent implements OnInit, AfterViewInit{
   }
 
   signOut(){
-    let url = this._serviceUrl.baseUrl + this._serviceUrl.leave;
+    let type = this.attendanceTypes.find((type: any)=>{
+      return type.name == "Sign Out";
+    });
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.attend + '/' + type.id;
     this._serviceCall.postObservable(url, {}, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
       this.messageService.add({ severity: 'success', summary: 'Sign Out Successfully', detail: "Bye Bye "+response.user.name });
     })
