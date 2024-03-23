@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Set;
@@ -21,6 +22,11 @@ public class AttendanceController {
     @PostMapping("enter/{typeID}")
     public ResponseEntity attend(@PathVariable Long typeID) throws Exception {
         return ResponseEntity.ok(attendenceServices.save(typeID));
+    }
+
+    @GetMapping("last-enter")
+    public ResponseEntity getLastEnter() throws ParseException {
+        return ResponseEntity.ok(attendenceServices.getTheLastTodayAttendance());
     }
 
     @PostMapping("leave")

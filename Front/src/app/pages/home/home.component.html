@@ -46,21 +46,17 @@
 
     </div>
 
-    <div class="col-md-4 row">
-
-      <div class="card text-center container d-block col-12" (click)="signIn()">
-        <div class="card-body">
-          <p class="lead display-6">
-            <i class="fas fa-sign-in"></i> Sign In
-          </p>
+    <div class="col-md-4 row d-flex justify-content-center">
+      @if (lastAttendance == null || lastAttendance.type.name == 'Sign Out'){
+        <div class="card text-center container d-flex justify-content-center col-8" (click)="signIn()">
+            <p class="lead display-6"><i class="fas fa-sign-in"></i> Sign In</p>
         </div>
-      </div>
-
-      <div class="card text-center container d-block col-12" style="margin-top: 10vh" (click)="signOut()">
-        <div class="card-body">
-          <p class="lead display-6">Sign Out <i class="fas fa-sign-out"></i></p>
+      } @else {
+        <div class="card text-center container d-flex justify-content-center col-8" (click)="signOut()">
+            <p class="lead display-6">Sign Out <i class="fas fa-sign-in"></i></p>
         </div>
-      </div>
+      }
+
 
     </div>
   </div>
