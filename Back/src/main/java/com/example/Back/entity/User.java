@@ -1,6 +1,7 @@
 package com.example.Back.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,6 +19,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "users")
+@Builder
 public class User  implements UserDetails {
 
     @Id
@@ -25,13 +27,24 @@ public class User  implements UserDetails {
     @SequenceGenerator(name = "user_seq", initialValue = 1, sequenceName = "user_seq", allocationSize = 1)
     private Long id;
 
+    @NotNull(message = "The Name Field Is Required")
     private String name;
+
+    @NotNull(message = "The Email Is Required")
     @Column(unique = true)
     private String email;
+
+    @NotNull(message = "The Phone Filed Is Required")
     private String phone;
-    private int salary;
+
+    @NotNull(message = "The Salary Field Is Required")
+    private Integer salary;
+
+    @NotNull(message = "The Password Field Is Required")
     @JsonIgnore
     private String password;
+
+    @NotNull(message = "The Role Is Required")
     @ManyToOne()
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Roles role;

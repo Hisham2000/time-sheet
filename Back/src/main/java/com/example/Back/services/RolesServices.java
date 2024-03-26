@@ -2,6 +2,7 @@ package com.example.Back.services;
 
 import com.example.Back.entity.Roles;
 import com.example.Back.entity.User;
+import com.example.Back.handler.PreventSaveException;
 import com.example.Back.repository.RolesRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +24,9 @@ public class RolesServices {
 
     public Iterable<Roles> all(){
         return rolesRepo.findAll();
+    }
+
+    public Roles findById(Long id) throws PreventSaveException {
+        return rolesRepo.findById(id).orElseThrow(()-> new PreventSaveException("There Is No Role With This Id"));
     }
 }

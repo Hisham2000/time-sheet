@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit{
         },
 
       ];
-      if(response[0].name === 'HR')
+      if(response.name === 'HR' || response.name === 'Admin')
       {
         this.items.push(
           {label: 'Employees Module', icon: 'fas fa-users', items: [
@@ -99,7 +99,7 @@ export class NavbarComponent implements OnInit{
               {label: 'All Employees', icon: 'fas fa-users', routerLink: ['/hr/allusers']}
             ]},
         );
-      }else if(response[0].name === 'Manager')
+      }else if(response.name === 'Manager')
       {
         this.items.push(
           {label: 'Admin MOdule'},

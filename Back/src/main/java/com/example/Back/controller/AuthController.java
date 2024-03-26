@@ -1,9 +1,11 @@
 package com.example.Back.controller;
 
+import com.example.Back.dto.AddNewEmployeeRequest;
 import com.example.Back.dto.AuthenticationResponse;
 import com.example.Back.dto.LoginRequest;
 import com.example.Back.entity.Roles;
 import com.example.Back.entity.User;
+import com.example.Back.handler.PreventSaveException;
 import com.example.Back.handler.WrongUserNameOrPasswordException;
 import com.example.Back.secuirty.JwtTokenUtilities;
 import com.example.Back.services.UserServices;
@@ -14,6 +16,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +34,9 @@ public class AuthController {
 
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/login")
     public AuthenticationResponse generateToken(@Validated @RequestBody LoginRequest loginRequest) throws WrongUserNameOrPasswordException {
@@ -58,8 +64,9 @@ public class AuthController {
 
     @Secured("HR")
     @PostMapping("/register")
-    public void register(@RequestBody User user){
-//        userServices.save(user);
+    public void register(@Validated @RequestBody AddNewEmployeeRequest addNewEmployeeRequest) throws PreventSaveException {
+        String password = bCryptPasswordEncoder.encode("123456789");
+        userServices.save(addNewEmployeeRequest, password);
     }
 
     //     Note that it isn't necessary to add the ROLE_ prefix here because Spring Security will add that prefix automatically.
