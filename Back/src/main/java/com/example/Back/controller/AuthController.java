@@ -10,6 +10,7 @@ import com.example.Back.handler.WrongUserNameOrPasswordException;
 import com.example.Back.secuirty.JwtTokenUtilities;
 import com.example.Back.services.UserServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +25,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api", produces = "application/json")
 @CrossOrigin()
 public class AuthController {
     @Autowired
@@ -64,9 +65,9 @@ public class AuthController {
 
     @Secured("HR")
     @PostMapping("/register")
-    public void register(@Validated @RequestBody AddNewEmployeeRequest addNewEmployeeRequest) throws PreventSaveException {
+    public ResponseEntity register(@Validated @RequestBody AddNewEmployeeRequest addNewEmployeeRequest) throws PreventSaveException {
         String password = bCryptPasswordEncoder.encode("123456789");
-        userServices.save(addNewEmployeeRequest, password);
+        return ResponseEntity.ok(userServices.save(addNewEmployeeRequest, password));
     }
 
     //     Note that it isn't necessary to add the ROLE_ prefix here because Spring Security will add that prefix automatically.

@@ -11,6 +11,8 @@ export class ServiceUrl {
   public leave = 'attendant/leave';
   public getAttendanceType = 'attendance-type/all';
   public getLastAttendant = 'attendant/last-enter';
+  public getAllRoles = 'rolles/all';
+  public saveNewEmployee = 'register';
 
   constructor() {
     this.getUrl()

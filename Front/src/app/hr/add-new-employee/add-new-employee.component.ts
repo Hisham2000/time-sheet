@@ -3,6 +3,9 @@ import {HrService} from "../hr.service";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {DropdownModule} from "primeng/dropdown";
+import {ServiceUrl} from "../../../../Utilities/ServiceUrl";
+import {ServiceCall} from "../../../../Utilities/ServiceCall";
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-add-new-employee',
@@ -16,7 +19,9 @@ import {DropdownModule} from "primeng/dropdown";
   standalone: true
 })
 export class AddNewEmployeeComponent implements OnInit{
-  constructor(private hrService: HrService) {
+  constructor(private hrService: HrService,
+              private _serviceUrl: ServiceUrl,
+              private _serviceCall: ServiceCall) {
   }
 
   myform = new FormGroup({
@@ -43,8 +48,13 @@ export class AddNewEmployeeComponent implements OnInit{
   roles: any;
 
   ngOnInit(): void {
-    this.hrService.allRoles().subscribe((roles:any)=>{
-      this.roles = roles;
+    this.getRoles();
+  }
+
+  getRoles(){
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.getAllRoles;
+    this._serviceCall.getOpservable(url, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
+      this.roles = response;
     });
   }
 
@@ -57,13 +67,11 @@ export class AddNewEmployeeComponent implements OnInit{
   }
 
   getSalary(){
-    return this.myform.get("salary")?.value;
+    return Number(this.myform.get("salary")?.value);
   }
 
-  getrole(){
-    let converRoleToArray = [];
-    converRoleToArray.push(this.myform.get("role")?.value);
-    return converRoleToArray;
+  getRole(){
+    return Number((this.myform.get("role")?.value as any)?.id ?? null);
   }
 
   getPhone(){
@@ -71,7 +79,22 @@ export class AddNewEmployeeComponent implements OnInit{
   }
 
   submit() {
-    //put a pop up on success scenario
-    this.hrService.saveUser(this.getName(), this.getEmail(), this.getPhone(), this.getSalary(), this.getrole());
+    let body = {
+      "name": this.getName(),
+      "email": this.getEmail(),
+      "roleId": this.getRole(),
+      "salary": this.getSalary(),
+      "phone": this.getPhone()
+    }
+    let url = this._serviceUrl.baseUrl + this._serviceUrl.saveNewEmployee;
+    this._serviceCall.postObservable(url, body, this._serviceCall.getDefaultHeaders(null)).subscribe((response: any)=>{
+      Swal.fire({
+        title: "Employee added successfully",
+        icon: 'success',
+        width: '500px',
+        confirmButtonText: "Close"
+      })
+    });
+    this.myform.reset();
   }
 }

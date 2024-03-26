@@ -32,7 +32,7 @@ public class UserServices {
         return userRepo.findUsersByEmail(email);
     }
 
-    public void save(AddNewEmployeeRequest addNewEmployeeRequest, String password) throws PreventSaveException {
+    public User save(AddNewEmployeeRequest addNewEmployeeRequest, String password) throws PreventSaveException {
         Roles role = rolesServices.findById(addNewEmployeeRequest.getRoleId());
         User user = User.builder()
                 .role(role)
@@ -43,7 +43,7 @@ public class UserServices {
                 .password(password)
                 .build();
 
-        userRepo.save(user);
+        return userRepo.save(user);
 //        String body = "User Name: " + user.getName() + "\n Email: "+ user.getEmail() + "\n password: 123456789";
 //        sendEmailService.sendEmail(user.getEmail(),
 //                "Account Details on Time Sheet", body);
