@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
-import { Table } from 'primeng/table';
+import {Table, TableModule} from 'primeng/table';
 import {HrService} from "../hr.service";
 import {Router} from "@angular/router";
+import {ButtonModule} from "primeng/button";
+import {RippleModule} from "primeng/ripple";
 @Component({
   selector: 'app-all-users',
   templateUrl: './all-users.component.html',
-  styleUrls: ['./all-users.component.scss']
+  styleUrls: ['./all-users.component.scss'],
+  imports: [
+    TableModule,
+    ButtonModule,
+    RippleModule
+  ],
+  standalone: true
 })
 export class AllUsersComponent {
 

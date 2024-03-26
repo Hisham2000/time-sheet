@@ -1,11 +1,19 @@
 import {Component, OnInit} from '@angular/core';
 import {HrService} from "../hr.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {DropdownModule} from "primeng/dropdown";
 
 @Component({
   selector: 'app-add-new-employee',
   templateUrl: './add-new-employee.component.html',
-  styleUrls: ['./add-new-employee.component.scss']
+  styleUrls: ['./add-new-employee.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    InputTextareaModule,
+    DropdownModule
+  ],
+  standalone: true
 })
 export class AddNewEmployeeComponent implements OnInit{
   constructor(private hrService: HrService) {

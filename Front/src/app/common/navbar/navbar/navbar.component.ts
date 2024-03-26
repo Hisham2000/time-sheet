@@ -95,8 +95,8 @@ export class NavbarComponent implements OnInit{
       {
         this.items.push(
           {label: 'Employees Module', icon: 'fas fa-users', items: [
-              {label: 'Add employee', icon: 'fas fa-user-plus', routerLink: ['/hr/addnewemployee']},
-              {label: 'All Employees', icon: 'fas fa-users', routerLink: ['/hr/allusers']}
+              {label: 'Add employee', icon: 'fas fa-user-plus', routerLink: ['/pages/hr/add-new-employee']},
+              {label: 'All Employees', icon: 'fas fa-users', routerLink: ['/pages/hr/all-users']}
             ]},
         );
       }else if(response.name === 'Manager')
