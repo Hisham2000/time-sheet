@@ -65,7 +65,7 @@ public class AuthController {
 
     @Secured("HR")
     @PostMapping("/register")
-    public ResponseEntity register(@Validated @RequestBody AddNewEmployeeRequest addNewEmployeeRequest) throws PreventSaveException {
+    public ResponseEntity register(@Validated @RequestBody AddNewEmployeeRequest addNewEmployeeRequest) throws Exception {
         String password = bCryptPasswordEncoder.encode("123456789");
         return ResponseEntity.ok(userServices.save(addNewEmployeeRequest, password));
     }

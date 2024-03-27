@@ -10,8 +10,11 @@ import com.example.Back.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
 
 import javax.management.relation.Role;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -20,7 +23,7 @@ public class UserServices {
     UserRepo userRepo;
 
     @Autowired
-    SendEmailService sendEmailService;
+    EmailService emailService;
 
     @Autowired
     private RolesServices rolesServices;
@@ -32,7 +35,7 @@ public class UserServices {
         return userRepo.findUsersByEmail(email);
     }
 
-    public User save(AddNewEmployeeRequest addNewEmployeeRequest, String password) throws PreventSaveException {
+    public User save(AddNewEmployeeRequest addNewEmployeeRequest, String password) throws Exception {
         Roles role = rolesServices.findById(addNewEmployeeRequest.getRoleId());
         User user = User.builder()
                 .role(role)
@@ -42,7 +45,15 @@ public class UserServices {
                 .salary(addNewEmployeeRequest.getSalary())
                 .password(password)
                 .build();
+        Context context = new Context();
+        Map<String, Object> model = new HashMap<>();
+        model.put("password", "123456789");
+        model.put("toMail", user.getEmail());
+        model.put("userName", user.getName());
+        model.put("password", "123456789");
+        model.put("supportMail", "sales@mint-ops.com");
 
+        emailService.processEmailTemplateAndSend(model, context, user.getEmail(), "Welcome Email", "welcome.html");
         return userRepo.save(user);
 //        String body = "User Name: " + user.getName() + "\n Email: "+ user.getEmail() + "\n password: 123456789";
 //        sendEmailService.sendEmail(user.getEmail(),

@@ -1,0 +1,26 @@
+<!-- email-template.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>HR, Welcome Email</title>
+    <style>
+        p{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: beige; padding: 20px">
+<div style="margin: 0px auto; width: 100%; height: 10%; background-color: crimson">
+    <h1 style="font-weight: bold; text-align: center">HR, Welcome Email</h1>
+
+</div>
+<p style="font-weight: bold">Dear <span th:text="${toMail}" style="color: blue"></span> ( <span th:text="${userName}" style="color: blue"></span> ),</p>
+<p>hope this mail finds you well.</p>
+<p>Welcome to our community hope you find all you need</p>
+<p style="color: red">kindly be noted that your password is <span th:text="${password}"></span></p>
+
+<p>If you have any questions or need assistance, please contact our customer support at <span style="text-align: center; color: blue" th:text="${supportMail}"></span></p>
+<p>Best Regards,</p>
+<p>Mint-Ops Support Team.</p>
+</body>
+</html>
